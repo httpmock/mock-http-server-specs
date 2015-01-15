@@ -1,7 +1,7 @@
 import SonatypeKeys._
 
 
-name := "com.github.httpmock.specs"
+name := "httpmock-specs"
 
 version := "0.1"
 
@@ -17,9 +17,9 @@ resolvers ++= Seq(
 
 libraryDependencies ++= Seq(
   "org.specs2" %% "specs2" % "2.4.15" % "compile",
-  "com.github.httpmock" % "mock-http-server-junit" % "1.1.6-SNAPSHOT" % "compile",
-  "com.github.httpmock" % "mock-http-server-exec" % "1.1.6-SNAPSHOT" % "compile",
-  "com.github.httpmock" % "mock-http-server-webapp" % "1.1.6-SNAPSHOT" % "compile" artifacts (Artifact("mock-http-server-webapp", "standalone"))
+  "com.github.httpmock" % "mock-http-server-junit" % "1.1.6" % "compile",
+  "com.github.httpmock" % "mock-http-server-exec" % "1.1.6" % "compile",
+  "com.github.httpmock" % "mock-http-server-webapp" % "1.1.6" % "compile" artifacts (Artifact("mock-http-server-webapp", "standalone"))
 )
 
 // Scoverage

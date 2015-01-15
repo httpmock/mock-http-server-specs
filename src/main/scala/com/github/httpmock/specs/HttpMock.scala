@@ -1,9 +1,10 @@
 package com.github.httpmock.specs
 
 import com.github.httpmock.dto.RequestDto
-import com.github.httpmock.rules.{MockService, MockVerifyException, StandaloneMockServer, Stubbing}
-import com.github.httpmock.times.Times
-import com.github.httpmock.{Configuration, MockServer, PortUtil}
+import com.github.httpmock.exec.{PortUtil, Configuration, StandaloneMockServer}
+import com.github.httpmock.api.{MockService, MockVerifyException, Stubbing}
+import com.github.httpmock.api.times.Times
+import com.github.httpmock.MockServer
 import org.specs2.mutable
 import org.specs2.specification.{After, Fragments, Scope, Step}
 
@@ -34,7 +35,7 @@ trait HttpMockServer extends BeforeAllAfterAll {
 
   def randomPortsConfig: Configuration = {
     val ports = PortUtil.getRandomPorts(3)
-    import com.github.httpmock.ConfigurationBuilder._
+    import com.github.httpmock.exec.ConfigurationBuilder._
     config()
       .httpPort(ports.get(0))
       .stopPort(ports.get(1))
@@ -52,7 +53,7 @@ class HttpMock(val mockService: MockService) extends Scope with After {
     this(mockServer.createMock())
   }
 
-  override def after: Unit = {
+  override def after {
     deleteMock()
   }
 
