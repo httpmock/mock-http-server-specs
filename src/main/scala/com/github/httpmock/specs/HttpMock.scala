@@ -4,7 +4,6 @@ import com.github.httpmock.dto.RequestDto
 import com.github.httpmock.rules.{MockService, MockVerifyException, StandaloneMockServer, Stubbing}
 import com.github.httpmock.times.Times
 import com.github.httpmock.{MockServer, PortUtil}
-import com.jayway.awaitility.scala.AwaitilitySupport
 import org.specs2.mutable
 import org.specs2.specification.{After, Fragments, Scope, Step}
 
@@ -17,7 +16,7 @@ trait BeforeAllAfterAll extends mutable.Specification {
   protected def afterAll()
 }
 
-trait HttpMockServer extends BeforeAllAfterAll with AwaitilitySupport {
+trait HttpMockServer extends BeforeAllAfterAll {
   var mockServer: MockServer = null
 
   def createMock() = {

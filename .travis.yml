@@ -12,10 +12,20 @@ cache:
   directories:
   - "$HOME/.sbt"
   - "$HOME/.ivy2"
+before_install:
+- openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in secring.gpg.enc -out local.secring.gpg
+  -d
+- openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in pubring.gpg.enc -out local.pubring.gpg
+  -d
+- openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in credentials.sbt.enc -out
+  local.credentials.sbt -d
 script:
 - sbt ++$TRAVIS_SCALA_VERSION clean coverage test
 after_success:
 - sbt ++$TRAVIS_SCALA_VERSION coveralls
 - test -n "${TRAVIS_TAG}" && test "${TRAVIS_JDK_VERSION}" = 'oraclejdk7' && test "${TRAVIS_SCALA_VERSION}"
   = "2.11.4" && sbt publishSigned sonatypeRelease
-
+env:
+  global:
+  - secure: LIJgJUEflAiTNxmr4Hgp6bgChEH12La20Sr+Hl93IpFQ+hv+/ftkIzCWlfxPyuByT/mvsBJMLlU5OzYuMe4dhKhu9s689NH3X8yL43SIPXnBmbDrA4zdSDIVaEMdT9RDqAlIKOpbltag+OzeQj+J6qxGSNt7Bzgm0cyrdx/g1aI=
+  - secure: YknA3t19vKKEuRFxUUr8WhwzzdsAVMrB29fSxBxlR0KADKTltM4FLgdFJ6JTzSeTH7D31rzlVKG9dylPK69QPLLNFHGKCoyqdpqvU+bV1yqX2Zgv9tGSrxzFGH1S28I+1Qp5c3GPVThNKd6cNDlQ+ngiFJ0FNUX37YFE2JkXlZI=
