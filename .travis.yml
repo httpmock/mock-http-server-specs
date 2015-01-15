@@ -1,0 +1,21 @@
+sudo: false
+language: scala
+scala:
+- 2.11.4
+- 2.10.4
+jdk:
+- oraclejdk7
+- oraclejdk8
+- openjdk6
+- openjdk7
+cache:
+  directories:
+  - "$HOME/.sbt"
+  - "$HOME/.ivy2"
+script:
+- sbt ++$TRAVIS_SCALA_VERSION clean coverage test
+after_success:
+- sbt ++$TRAVIS_SCALA_VERSION coveralls
+- test -n "${TRAVIS_TAG}" && test "${TRAVIS_JDK_VERSION}" = 'oraclejdk7' && test "${TRAVIS_SCALA_VERSION}"
+  = "2.11.4" && sbt publishSigned sonatypeRelease
+
