@@ -3,7 +3,7 @@ package com.github.httpmock.specs
 import com.github.httpmock.dto.RequestDto
 import com.github.httpmock.rules.{MockService, MockVerifyException, StandaloneMockServer, Stubbing}
 import com.github.httpmock.times.Times
-import com.github.httpmock.{MockServer, PortUtil}
+import com.github.httpmock.{Configuration, MockServer, PortUtil}
 import org.specs2.mutable
 import org.specs2.specification.{After, Fragments, Scope, Step}
 
@@ -28,10 +28,17 @@ trait HttpMockServer extends BeforeAllAfterAll {
   def baseUri = mockServer.getBaseUri
 
   override def beforeAll {
+    mockServer = new StandaloneMockServer(randomPortsConfig)
+    mockServer.start()
+  }
+
+  def randomPortsConfig: Configuration = {
     val ports = PortUtil.getRandomPorts(3)
     import com.github.httpmock.ConfigurationBuilder._
-    mockServer = new StandaloneMockServer(config().httpPort(ports.get(0)).stopPort(ports.get(1)).ajpPort(ports.get(2)).build())
-    mockServer.start()
+    config()
+      .httpPort(ports.get(0))
+      .stopPort(ports.get(1))
+      .ajpPort(ports.get(2)).build()
   }
 
   override def afterAll {
