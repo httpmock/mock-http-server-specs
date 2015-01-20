@@ -17,9 +17,9 @@ resolvers ++= Seq(
 
 libraryDependencies ++= Seq(
   "org.specs2" %% "specs2" % "2.4.15" % "compile",
-  "com.github.httpmock" % "mock-http-server-junit" % "1.1.6" % "compile",
-  "com.github.httpmock" % "mock-http-server-exec" % "1.1.6" % "compile",
-  "com.github.httpmock" % "mock-http-server-webapp" % "1.1.6" % "compile" artifacts (Artifact("mock-http-server-webapp", "standalone"))
+  "com.github.httpmock" % "mock-http-server-junit" % "1.1.7",
+  "com.github.httpmock" % "mock-http-server-exec" % "1.1.7",
+  "com.github.httpmock" % "mock-http-server-webapp" % "1.1.7" artifacts(Artifact("mock-http-server-webapp"))
 )
 
 // Scoverage
@@ -69,3 +69,4 @@ unmanagedSourceDirectories in Compile <+= (sourceDirectory in Compile, scalaBina
   (s, v) => s / ("scala_" + v)
 }
 
+net.virtualvoid.sbt.graph.Plugin.graphSettings
