@@ -3,7 +3,7 @@ import SonatypeKeys._
 
 name := "httpmock-specs"
 
-version := "0.2"
+version := "0.3"
 
 scalaVersion := "2.11.4"
 
