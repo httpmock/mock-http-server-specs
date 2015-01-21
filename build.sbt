@@ -3,7 +3,7 @@ import sbt._
 
 name := "httpmock-specs"
 
-version := "0.3"
+version := "0.4"
 
 scalaVersion := "2.11.4"
 
@@ -17,9 +17,9 @@ resolvers ++= Seq(
 
 libraryDependencies ++= Seq(
   "org.specs2" %% "specs2" % "2.4.15" % "compile",
-  "com.github.httpmock" % "mock-http-server-junit" % "1.1.7",
-  "com.github.httpmock" % "mock-http-server-exec" % "1.1.7",
-  "com.github.httpmock" % "mock-http-server-webapp" % "1.1.7" artifacts(Artifact("mock-http-server-webapp", "jar", "jar"))
+  "com.github.httpmock" % "mock-http-server-junit" % "1.1.8",
+  "com.github.httpmock" % "mock-http-server-exec" % "1.1.8",
+  "com.github.httpmock" % "mock-http-server-webapp" % "1.1.8" artifacts(Artifact("mock-http-server-webapp", "jar", "jar")) classifier ""
 )
 
 // Scoverage
@@ -46,6 +46,7 @@ pomExtra := {
       <url>https://github.com/httpmock/mock-http-server-specs</url>
       <connection>scm:git:git@github.com:httpmock/mock-http-server-specs.git</connection>
     </scm>
+
     <developers>
       <developer>
         <id>snordquist</id>
