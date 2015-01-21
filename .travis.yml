@@ -23,8 +23,7 @@ script:
 - sbt ++$TRAVIS_SCALA_VERSION clean coverage test
 after_success:
 - sbt ++$TRAVIS_SCALA_VERSION coveralls
-- test -n "${TRAVIS_TAG}" && test "${TRAVIS_JDK_VERSION}" = 'oraclejdk7' && test "${TRAVIS_SCALA_VERSION}"
-  = "2.11.4" && sbt publishSigned sonatypeRelease
+- test -n "${TRAVIS_TAG}" && test "${TRAVIS_JDK_VERSION}" = 'oraclejdk7' && sbt publishSigned sonatypeRelease
 env:
   global:
   - secure: LIJgJUEflAiTNxmr4Hgp6bgChEH12La20Sr+Hl93IpFQ+hv+/ftkIzCWlfxPyuByT/mvsBJMLlU5OzYuMe4dhKhu9s689NH3X8yL43SIPXnBmbDrA4zdSDIVaEMdT9RDqAlIKOpbltag+OzeQj+J6qxGSNt7Bzgm0cyrdx/g1aI=
