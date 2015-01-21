@@ -1,5 +1,5 @@
 import SonatypeKeys._
-
+import sbt._
 
 name := "httpmock-specs"
 
@@ -19,7 +19,7 @@ libraryDependencies ++= Seq(
   "org.specs2" %% "specs2" % "2.4.15" % "compile",
   "com.github.httpmock" % "mock-http-server-junit" % "1.1.7",
   "com.github.httpmock" % "mock-http-server-exec" % "1.1.7",
-  "com.github.httpmock" % "mock-http-server-webapp" % "1.1.7" artifacts(Artifact("mock-http-server-webapp"))
+  "com.github.httpmock" % "mock-http-server-webapp" % "1.1.7" artifacts(Artifact("mock-http-server-webapp", "jar", "jar"))
 )
 
 // Scoverage
@@ -53,6 +53,10 @@ pomExtra := {
         <url>https://github.com/snordquist</url>
       </developer>
     </developers>
+}
+
+pomPostProcess := { (pomXML: scala.xml.Node) =>
+  PomPostProcessor(pomXML)
 }
 
 scalacOptions ++= Seq(
