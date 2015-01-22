@@ -1,51 +1,9 @@
 package com.github.httpmock.specs
 
-import com.github.httpmock.dto.RequestDto
-import com.github.httpmock.exec.{PortUtil, Configuration, StandaloneMockServer}
-import com.github.httpmock.api.{MockService, MockVerifyException, Stubbing}
 import com.github.httpmock.api.times.Times
-import com.github.httpmock.MockServer
-import org.specs2.mutable
-import org.specs2.specification.{After, Fragments, Scope, Step}
-
-trait BeforeAllAfterAll extends mutable.Specification {
-  override def map(fragments: => Fragments) =
-    Step(beforeAll) ^ fragments ^ Step(afterAll)
-
-  protected def beforeAll()
-
-  protected def afterAll()
-}
-
-trait HttpMockServer extends BeforeAllAfterAll {
-  var mockServer: MockServer = null
-
-  def createMock() = {
-    val mockService = new MockService(baseUri, "/mockserver")
-    mockService.create()
-    mockService
-  }
-
-  def baseUri = mockServer.getBaseUri
-
-  override def beforeAll {
-    mockServer = new StandaloneMockServer(randomPortsConfig)
-    mockServer.start()
-  }
-
-  def randomPortsConfig: Configuration = {
-    val ports = PortUtil.getRandomPorts(3)
-    import com.github.httpmock.exec.ConfigurationBuilder._
-    config()
-      .httpPort(ports.get(0))
-      .stopPort(ports.get(1))
-      .ajpPort(ports.get(2)).build()
-  }
-
-  override def afterAll {
-    mockServer.stop()
-  }
-}
+import com.github.httpmock.api.{Stubbing, MockService, MockVerifyException}
+import com.github.httpmock.dto.RequestDto
+import org.specs2.specification.{After, Scope}
 
 class HttpMock(val mockService: MockService) extends Scope with After {
 
